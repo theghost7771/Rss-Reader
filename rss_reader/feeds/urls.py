@@ -18,5 +18,10 @@ urlpatterns = [
         regex=r"add/$",
         view=views.FeedCreateView.as_view(),
         name="create"
-    )
+    ),
+    url(
+        regex=r"item_list/$",
+        view=views.FeedItemListView.as_view(),
+        name="item_list"
+    ),
 ]

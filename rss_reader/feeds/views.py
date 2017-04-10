@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import ugettext as _
 from braces.views import LoginRequiredMixin
 
-from .models import Feed
+from .models import Feed, FeedItem
 from .forms import FeedForm
 
 
@@ -38,3 +38,9 @@ class FeedCreateView(LoginRequiredMixin, FeedActionMixin, CreateView):
 class FeedUpdateView(LoginRequiredMixin, FeedActionMixin, UpdateView):
     model = Feed
     success_msg = _('Updated')
+
+
+class FeedItemListView(LoginRequiredMixin, ListView):
+    model = FeedItem
+    context_object_name = 'feed_items'
+    template_name = 'feeds/item_list.html'

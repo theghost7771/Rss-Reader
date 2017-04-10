@@ -11,7 +11,7 @@ from django.views import defaults as default_views
 from rss_reader.feeds import views as feeds_views
 
 urlpatterns = [
-    url('^$', feeds_views.FeedListView.as_view(), name='home'),
+    url('^$', feeds_views.FeedItemListView.as_view(), name='home'),
     url(r'^feeds/', include('rss_reader.feeds.urls', namespace='feeds')),
 
     # Django Admin, use {% url 'admin:index' %}
