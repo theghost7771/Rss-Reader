@@ -19,7 +19,7 @@ APPS_DIR = ROOT_DIR.path('rss_reader')
 env = environ.Env()
 
 # .env file, should load only in development environment
-READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=True)
+READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=False)
 
 if READ_DOT_ENV_FILE:
     # Operating System Environment variables have precedence over variables defined in the .env file,
@@ -52,15 +52,14 @@ THIRD_PARTY_APPS = [
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
-
-    'allauth.socialaccount.providers.vk',
+    'allauth.socialaccount.providers.google',
 ]
 
 # Apps specific for this project go here.
 LOCAL_APPS = [
     # custom users app
     'rss_reader.users.apps.UsersConfig',
-    # Your stuff: custom apps go here
+    'rss_reader.feeds'
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

@@ -8,9 +8,11 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
+from rss_reader.feeds import views as feeds_views
+
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
-    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
+    url('^$', feeds_views.FeedListView.as_view(), name='home'),
+    url(r'^feeds/', include('rss_reader.feeds.urls', namespace='feeds')),
 
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),

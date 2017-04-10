@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 from django.db import models
+from django.utils.translation import ugettext as _
+
 from rss_reader.users.models import User
 
-# Create your models here.
 
 class Feed(models.Model):
     name = models.CharField(max_length=300)
@@ -19,3 +21,10 @@ class FeedItem(models.Model):
     pub_date = models.DateTimeField()
     url = models.URLField()
     created = models.DateTimeField(auto_now=True)
+
+# class Filter(models.Model):
+# """Filer for Feed"""
+#     condition =
+#     value =
+#     feed = models.ForeignKey(Feed)
+
