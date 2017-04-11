@@ -22,6 +22,8 @@ class Feed(models.Model):
     is_active = models.BooleanField(_('active'), default=True)
     url = models.URLField()
     user = models.ForeignKey(User)
+    telegram_notifications = models.BooleanField(default=False,
+                                                 help_text=_('Send notifications about new feed items to telegram'))
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 

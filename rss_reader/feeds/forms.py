@@ -10,7 +10,7 @@ from .models import Feed
 class FeedForm(forms.ModelForm):
     class Meta:
         model = Feed
-        fields = ('name', 'url', 'filters')
+        fields = ('name', 'url', 'filters', 'telegram_notifications')
 
     def __init__(self, *args, **kwargs):
         super(FeedForm, self).__init__(*args, **kwargs)

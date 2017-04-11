@@ -5,7 +5,7 @@
         <div class="feed-item">
             <div>
                 <a href="{{ item.url }}"><h3>{{ item.title }}</h3></a>
-                <small>{{ item.pub_date }}</small>&nbsp;[{{ item.feed.name }}]
+                <small>{{ item.pub_date }}</small>&nbsp;[<a href="{% url 'home' %}?feed={{ item.feed.id }}">{{ item.feed.name }}</a>]
             </div>
             <div class="feed-description">
                 {{ item.description|safe }}

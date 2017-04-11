@@ -25,6 +25,12 @@
     <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
     <!-- Your Stuff: Custom user template urls -->
   </div>
+    {% if not user.telegram_chat_id %}
+        <div>
+            <a target="_blank" href="{{ user.get_telegram_auth_url }}">here</a>
+        </div>
+    {% endif %}
+
 
 </div>
 <!-- End Action buttons -->
