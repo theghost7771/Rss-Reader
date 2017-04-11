@@ -59,8 +59,10 @@ class FeedItemListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = super(FeedItemListView, self).get_queryset()
+        # to make sure we get only users feeds
+        queryset = queryset.filter(feed__in=self.request.user.feed_set.all())
+        # TODO: unit test for this, need try to get foreign feeds
         if 'feed' in self.request.GET:
-            queryset = queryset.filter(feed__in=[self.request.user.feed_set.get(id=self.request.GET.get('feed'))])
-        else:
-            queryset = queryset.filter(feed__in=self.request.user.feed_set.all())
+            queryset = queryset.filter(feed_id=self.request.GET.get('feed'))
+
         return queryset
