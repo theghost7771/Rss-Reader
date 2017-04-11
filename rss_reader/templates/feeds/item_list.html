@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>Items</h2>
-    <table class="table">
     {% for item in feed_items %}
-        <tr>
-            <td>{{ item.title }}</td>
-            <td>{{ item.description|safe }}</td>
-        </tr>
+        <div class="feed-item">
+            <div>
+                <a href="{{ item.url }}"><h3>{{ item.title }}</h3></a>
+                <small>{{ item.pub_date }}</small>&nbsp;[{{ item.feed.name }}]
+            </div>
+            <div class="feed-description">
+                {{ item.description|safe }}
+            </div>
+        </div>
     {% endfor %}
-    </table>
+
 
 {% endblock %}

@@ -36,3 +36,14 @@
 [hidden][style="display: block;"] {
   display: block !important;
 }
+
+.feed-item {
+  /*border-bottom-style: solid;*/
+  border-bottom: 1px solid #808080;
+  padding-bottom: 20px;
+  margin-top: 10px;
+}
+
+.feed-description {
+
+}

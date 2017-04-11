@@ -17,7 +17,7 @@ class FeedForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
 
-        self.helper.add_input(Submit('submit', 'add'))
+        self.helper.add_input(Submit('submit', 'Save'))
 
     def clean_url(self):
         url = self.cleaned_data['url']

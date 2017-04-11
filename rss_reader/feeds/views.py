@@ -29,18 +29,34 @@ class FeedListView(LoginRequiredMixin, ListView):
     context_object_name = 'feeds'
     template_name = 'feeds/list.html'
 
+    def get_queryset(self):
+        queryset = super(FeedListView, self).get_queryset()
+        return queryset.filter(user=self.request.user)
+
 
 class FeedCreateView(LoginRequiredMixin, FeedActionMixin, CreateView):
     model = Feed
     success_msg = _('Created')
+
+    def get_queryset(self):
+        queryset = super(FeedCreateView, self).get_queryset()
+        return queryset.filter(user=self.request.user)
 
 
 class FeedUpdateView(LoginRequiredMixin, FeedActionMixin, UpdateView):
     model = Feed
     success_msg = _('Updated')
 
+    def get_queryset(self):
+        queryset = super(FeedUpdateView, self).get_queryset()
+        return queryset.filter(user=self.request.user)
+
 
 class FeedItemListView(LoginRequiredMixin, ListView):
     model = FeedItem
     context_object_name = 'feed_items'
     template_name = 'feeds/item_list.html'
+
+    def get_queryset(self):
+        queryset = super(FeedItemListView, self).get_queryset()
+        return queryset.filter(feed__in=self.request.user.feed_set.all())
