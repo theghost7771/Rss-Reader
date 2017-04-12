@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.views.generic import ListView, UpdateView, CreateView
 from django.contrib import messages
+from django.conf import settings
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext as _
+from django.db.models import Count
 from braces.views import LoginRequiredMixin
 
 from .models import Feed, FeedItem
@@ -56,13 +58,19 @@ class FeedItemListView(LoginRequiredMixin, ListView):
     model = FeedItem
     context_object_name = 'feed_items'
     template_name = 'feeds/item_list.html'
+    paginate_by = settings.FEED_PAGINATE_BY
 
     def get_queryset(self):
         queryset = super(FeedItemListView, self).get_queryset()
         # to make sure we get only users feeds
-        queryset = queryset.filter(feed__in=self.request.user.feed_set.all())
+        queryset = queryset.filter(feed__in=self.request.user.feed_set.all()).prefetch_related('feed')
         # TODO: unit test for this, need try to get foreign feeds
         if 'feed' in self.request.GET:
             queryset = queryset.filter(feed_id=self.request.GET.get('feed'))
 
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(FeedItemListView, self).get_context_data(**kwargs)
+        context['feeds'] = self.request.user.feed_set.all().annotate(count=Count('feeditem'))
+        return context

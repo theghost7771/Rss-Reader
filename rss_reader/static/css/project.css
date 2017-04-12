@@ -38,12 +38,15 @@
 }
 
 .feed-item {
-  /*border-bottom-style: solid;*/
   border-bottom: 1px solid #808080;
   padding-bottom: 20px;
   margin-top: 10px;
 }
 
-.feed-description {
 
+.leftmenu {
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  word-wrap: break-word;
 }

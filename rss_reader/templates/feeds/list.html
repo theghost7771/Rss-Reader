@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>Feeds</h2>
-    <ul>
+    <ul class="list-group">
         {% for feed in feeds %}
-            <li><a href="{% url 'feeds:update' feed.id %}">{{ feed.name }}</a> - {{ feed.url }}</li>
+            <li class="list-group-item"><a href="{% url 'feeds:update' feed.id %}">{{ feed.name }}</li>
         {% endfor %}
     </ul>
 {% endblock %}

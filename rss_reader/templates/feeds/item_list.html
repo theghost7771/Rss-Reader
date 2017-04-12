@@ -1,17 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>Items</h2>
-    {% for item in feed_items %}
-        <div class="feed-item">
-            <div>
-                <a href="{{ item.url }}"><h3>{{ item.title }}</h3></a>
-                <small>{{ item.pub_date }}</small>&nbsp;[<a href="{% url 'home' %}?feed={{ item.feed.id }}">{{ item.feed.name }}</a>]
-            </div>
-            <div class="feed-description">
-                {{ item.description|safe }}
-            </div>
+    <div class="row">
+        <div class="list-group col-sm-2 leftmenu">
+            <a class="list-group-item list-group-item-action{% if not request.GET.feed %} list-group-item-info{% endif %}" href="{% url 'home' %}">All</a>
+            {% for feed in feeds %}
+                <a href="{% url 'home' %}?feed={{ feed.id }}" class="list-group-item list-group-item-action{% if request.GET.feed == feed.id|slugify %} list-group-item-info{% endif %}">
+                    {{ feed.name }} <span class="tag tag-default tag-info pull-xs-right">{{ feed.count }}</span></a>
+            {% endfor %}
         </div>
-    {% endfor %}
+        <main class="col-sm-9">
 
+          <h1>Items</h1>
+
+            {% for item in feed_items %}
+                <div class="feed-item">
+                    <div>
+                        <a href="{{ item.url }}"><h3>{{ item.title }}</h3></a>
+                        <small>{{ item.pub_date }}</small>&nbsp;[<a href="{% url 'home' %}?feed={{ item.feed.id }}">{{ item.feed.name }}</a>]
+                    </div>
+                    <div class="feed-description">
+                        {# Yes I know, this is dangerous #}
+                        {{ item.description|safe }}
+                    </div>
+                </div>
+            {% endfor %}
+            <nav>
+              <ul class="pagination pagination-lg justify-content-center">
+                  {% if page_obj.has_previous %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+                    </li>
+                  {% endif %}
+                  {% if page_obj.has_next %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                  {% endif %}
+              </ul>
+            </nav>
+        </main>
+    </div>
 
 {% endblock %}

@@ -295,3 +295,5 @@ CACHES = {
 # ------------------------------------------------------------------------------
 TELEGRAM_BOT_TOKEN = env('TELEGRAM_BOT_TOKEN', default='')
 TELEGRAM_BOT_NAME = env('TELEGRAM_BOT_NAME', default='')
+
+FEED_PAGINATE_BY = 20

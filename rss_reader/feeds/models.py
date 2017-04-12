@@ -27,6 +27,9 @@ class Feed(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['created']
+
     def collect_items(self):
         """Collect and return all new items in feed.
         Modifying current feed.rss_modified/etag/title, and saves it to db.
