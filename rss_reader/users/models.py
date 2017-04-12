@@ -36,4 +36,4 @@ class User(AbstractUser):
             cache.set(cache_key, telegram_auth_id)
             cache.set('telegram_auth_id:{}'.format(telegram_auth_id), self.id)
 
-        return 'https://telegram.me/{}?startasd={}'.format(settings.TELEGRAM_BOT_NAME, telegram_auth_id)
+        return 'https://telegram.me/{}?start={}'.format(settings.TELEGRAM_BOT_NAME, telegram_auth_id)
